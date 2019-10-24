@@ -22,6 +22,18 @@ namespace Project_DAL.EntityConfigrations
                 .Property(u => u.Name)
                 .HasColumnName("user_name")
                 .IsRequired();
+
+            builder.HasData(new User
+            {
+                Name = "John"
+            }, new User
+            {
+                Name = "James"
+            }, new User
+            {
+                Name = "Steve"
+            });
+
         }
     }
 }
