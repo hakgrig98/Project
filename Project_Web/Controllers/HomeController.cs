@@ -18,7 +18,7 @@ namespace Project_Web.Controllers
         }
         public IActionResult Index()
         {
-            var users=_unitOfWork.UserRepository.FetchAll();
+            //var dataToShow = from 
             return View();
         }
     }

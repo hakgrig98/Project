@@ -12,6 +12,9 @@ namespace Project_DAL.EntityConfigrations
         public void Configure(EntityTypeBuilder<AdvertUser> builder)
         {
             builder.
+                ToTable("advert_user");
+
+            builder.
                 HasKey(au => new { au.AdvertId, au.UserId });
 
             builder
