@@ -25,12 +25,15 @@ namespace Project_DAL.EntityConfigrations
 
             builder.HasData(new User
             {
+                Id = 1,
                 Name = "John"
             }, new User
             {
+                Id = 2,
                 Name = "James"
             }, new User
             {
+                Id = 3,
                 Name = "Steve"
             });
 
