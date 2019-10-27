@@ -8,6 +8,7 @@ namespace Project_DAL.Entities
     public class Advert
     {
         public int Id { get; set; }
+        public int Number { get; set; }
         public DateTime CreatedDate { get; set; }
         public int Rating { get; set; }
         public string Text { get; set; }

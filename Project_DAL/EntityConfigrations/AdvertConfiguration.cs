@@ -19,6 +19,11 @@ namespace Project_DAL.EntityConfigrations
                 .HasName("advert_id");
 
             builder
+                .Property((a) => a.Number)
+                .HasColumnName("advert_number")
+                .IsRequired();
+
+            builder
                 .Property((a) => a.Text)
                 .HasColumnName("advert_text")
                 .IsRequired();

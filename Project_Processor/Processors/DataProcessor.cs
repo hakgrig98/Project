@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Project_DAL.Entities;
 using Project_DAL.UnitOfWork;
 using Project_Processor.Factories;
 using Project_Processor.Models;
@@ -19,6 +20,50 @@ namespace Project_Processor.Processors
             _advertProcessorModelFactory = advertProcessorModelFactory;
             _userProcessorModelFactory = userProcessorModelFactory;
         }
+
+        public string AddAdvert(int number, DateTime createdDate, string text, int userId, int rating)
+        {
+            string responseText = "Ok";
+
+            try
+            {
+                var advert = new Advert
+                {
+                    CreatedDate = createdDate,
+                    Number = number,
+                    Rating = rating,
+                    Text = text,
+                };
+
+                if (userId == -1)//userId=-1 means all users
+                {
+                    foreach (var user in _unitOfWork.UserRepository.FetchAll())
+                    {
+                        _unitOfWork.AdvertUserRepository.Add(new AdvertUser
+                        {
+                            Advert = advert,
+                            User = user
+                        });
+                    }
+                }
+                else
+                {
+                    _unitOfWork.AdvertUserRepository.Add(new AdvertUser
+                    {
+                        Advert = advert,
+                        UserId = userId
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO:Needs to log exception
+                responseText = "Something happend with adding advert to database";
+            }
+           
+            return responseText;
+        }
+
         public IList<IAdvertProcessorModel> GetAdverts()
         {
             var advertModels = new List<IAdvertProcessorModel>();
@@ -26,7 +71,7 @@ namespace Project_Processor.Processors
             foreach (var advert in _unitOfWork.AdvertRepository.FetchAll())
             {
                 var users = new List<IUserProcessorModel>();
-                foreach(var advertuser in advert.AdvertUser)
+                foreach (var advertuser in advert.AdvertUser)
                 {
                     users.Add(_userProcessorModelFactory.Create(advertuser.User.Name));
                 }
@@ -35,6 +80,18 @@ namespace Project_Processor.Processors
             }
 
             return advertModels;
+        }
+
+        public IList<IUserProcessorModel> GetUsers()
+        {
+            var userModels = new List<IUserProcessorModel>();
+
+            foreach (var user in _unitOfWork.UserRepository.FetchAll())
+            {
+                userModels.Add(_userProcessorModelFactory.Create(user.Name));
+            }
+
+            return userModels;
         }
     }
 }
