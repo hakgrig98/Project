@@ -25,8 +25,16 @@ namespace Project_Processor.Processors
 
             foreach (var advert in _unitOfWork.AdvertRepository.FetchAll())
             {
-                //advertModels.Add(_advertProcessorModelFactory.Create(advert.Id,advert.CreatedDate,advert.Text,advert.Rating,))
+                var users = new List<IUserProcessorModel>();
+                foreach(var advertuser in advert.AdvertUser)
+                {
+                    users.Add(_userProcessorModelFactory.Create(advertuser.User.Name));
+                }
+
+                advertModels.Add(_advertProcessorModelFactory.Create(advert.Id, advert.CreatedDate, advert.Text, advert.Rating, users));
             }
+
+            return advertModels;
         }
     }
 }

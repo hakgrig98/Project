@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Project_DAL.ServiceCollectionConfig;
+using Project_Processor.ServiceCollectionConfig;
 
 namespace Project_Web
 {
@@ -34,7 +34,7 @@ namespace Project_Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.RegisterDataAccessLayer(Configuration);
+            services.RegisterProcessorLayer(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

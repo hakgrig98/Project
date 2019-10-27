@@ -5,21 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project_DAL.UnitOfWork;
+using Project_Processor.Processors;
 using Project_Web.Models;
 
 namespace Project_Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public HomeController(IUnitOfWork unitOfWork)
+        private readonly IDataProcessor _dataProcessor;
+        public HomeController(IDataProcessor dataProcessor)
         {
-            _unitOfWork = unitOfWork;
+            _dataProcessor = dataProcessor;
         }
         public IActionResult Index()
         {
-            //var dataToShow = from 
-            return View();
+            var adverts=_dataProcessor.GetAdverts();
+            return View(adverts);
         }
     }
 }
