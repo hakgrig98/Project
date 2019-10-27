@@ -36,7 +36,7 @@ namespace Project_Web.Controllers
             string response = string.Empty;
             if (ModelState.IsValid)
             {
-                response = _dataProcessor.AddAdvert(advertModel.Number, advertModel.CreatedDate, advertModel.UserId, advertModel.Rating);
+                response = _dataProcessor.AddAdvert(advertModel.Number, advertModel.CreatedDate,advertModel.Text, advertModel.UserId, advertModel.Rating);
             }
             else
             {

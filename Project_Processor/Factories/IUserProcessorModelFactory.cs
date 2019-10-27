@@ -7,6 +7,6 @@ namespace Project_Processor.Factories
 {
     public interface IUserProcessorModelFactory
     {
-        IUserProcessorModel Create(string name);
+        IUserProcessorModel Create(string name,int id);
     }
 }

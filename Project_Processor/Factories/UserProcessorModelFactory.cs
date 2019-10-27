@@ -7,11 +7,12 @@ namespace Project_Processor.Factories
 {
     public class UserProcessorModelFactory : IUserProcessorModelFactory
     {
-        public IUserProcessorModel Create(string name)
+        public IUserProcessorModel Create(string name, int id)
         {
             return new UserProcessorModel
             {
-                Name = name
+                Name = name,
+                Id=id
             };
         }
     }

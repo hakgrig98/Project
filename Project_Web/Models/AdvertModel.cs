@@ -13,6 +13,8 @@ namespace Project_Web.Models
         [Required]
         public DateTime CreatedDate { get; set; }
         [Required]
+        public string Text { get; set; }
+        [Required]
         public int UserId { get; set; }
         [Required]
         [Range(0, 10)]

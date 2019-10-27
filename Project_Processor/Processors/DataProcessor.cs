@@ -73,7 +73,7 @@ namespace Project_Processor.Processors
                 var users = new List<IUserProcessorModel>();
                 foreach (var advertuser in advert.AdvertUser)
                 {
-                    users.Add(_userProcessorModelFactory.Create(advertuser.User.Name));
+                    users.Add(_userProcessorModelFactory.Create(advertuser.User.Name, advertuser.User.Id));
                 }
 
                 advertModels.Add(_advertProcessorModelFactory.Create(advert.Id, advert.CreatedDate, advert.Text, advert.Rating, users));
@@ -88,7 +88,7 @@ namespace Project_Processor.Processors
 
             foreach (var user in _unitOfWork.UserRepository.FetchAll())
             {
-                userModels.Add(_userProcessorModelFactory.Create(user.Name));
+                userModels.Add(_userProcessorModelFactory.Create(user.Name,user.Id));
             }
 
             return userModels;
